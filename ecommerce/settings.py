@@ -22,10 +22,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-
     'store',
+    'accounts',
     'cart',
-]
+    ]
 
 
 # Middleware
@@ -102,6 +102,7 @@ USE_TZ = True
 
 # Static Files
 STATIC_URL = 'static/'
+STATICFILES_DIRS = [BASE_DIR / 'static']
 
 
 # Email Configuration
