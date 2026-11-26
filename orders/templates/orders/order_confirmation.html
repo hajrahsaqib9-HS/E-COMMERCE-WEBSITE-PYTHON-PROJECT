@@ -1,0 +1,19 @@
+
+{% extends 'orders/base_orders.html' %}
+
+{% block content %}
+<div class="form-card text-center">
+    <h2>Order Confirmed!</h2>
+    <p>Thank you for shopping with VELORA.</p>
+
+    <h5>Order Number</h5>
+    <p>{{ order.order_number }}</p>
+
+    <h5>Total Amount</h5>
+    <p>Rs. {{ order.total_amount }}</p>
+
+    <a class="btn order-btn" href="{% url 'order_details' order.order_number %}">
+        View Order Details
+    </a>
+</div>
+{% endblock %}
