@@ -1,0 +1,125 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block content %}
+
+<section class="profile-section">
+
+    <div class="profile-heading">
+
+        <span class="section-subtitle">MY ACCOUNT</span>
+
+        <h1>My <span>Profile</span></h1>
+
+        <p>Manage your personal information and account details.</p>
+
+    </div>
+
+    <div class="profile-card">
+
+        <div class="profile-top">
+
+            <div class="profile-avatar">♡</div>
+
+            <div>
+
+                <h2>{{ request.user.first_name }} {{ request.user.last_name }}</h2>
+
+                <p>{{ request.user.email }}</p>
+
+                <span class="profile-status">VELORA MEMBER</span>
+
+            </div>
+
+        </div>
+
+        <hr>
+
+        <h3 class="profile-subheading">Personal Information</h3>
+
+        <div class="profile-details">
+
+            <div class="detail-item">
+
+                <span>Username</span>
+
+                <strong>{{ request.user.username }}</strong>
+
+            </div>
+
+            <div class="detail-item">
+
+                <span>First Name</span>
+
+                <strong>{{ request.user.first_name }}</strong>
+
+            </div>
+
+            <div class="detail-item">
+
+                <span>Last Name</span>
+
+                <strong>{{ request.user.last_name }}</strong>
+
+            </div>
+
+            <div class="detail-item">
+
+                <span>Email Address</span>
+
+                <strong>{{ request.user.email }}</strong>
+
+            </div>
+
+            <div class="detail-item">
+
+                <span>Phone Number</span>
+
+                <strong>{{ profile.phone_number|default:"Not added yet" }}</strong>
+
+            </div>
+
+            <div class="detail-item">
+
+                <span>Address</span>
+
+                <strong>{{ profile.address|default:"Not added yet" }}</strong>
+
+            </div>
+
+        </div>
+
+        <div class="profile-actions">
+
+            <a href="{% url 'accounts:update_profile' %}" class="auth-button">
+
+                Edit Profile
+
+            </a>
+
+            <a href="{% url 'store:home' %}" class="back-home">
+
+                Continue Shopping →
+
+            </a>
+
+            <form method="POST" action="{% url 'accounts:logout' %}">
+
+                {% csrf_token %}
+
+                <button type="submit" class="auth-button">
+
+                    Logout
+
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}
