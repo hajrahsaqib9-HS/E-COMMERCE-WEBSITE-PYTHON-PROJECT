@@ -1,17 +1,11 @@
-"""
-URL configuration for the ecommerce project.
-"""
+﻿"""URL configuration for the ecommerce project."""
 
 from django.contrib import admin
-from django.urls import path, include
-from store.views import home
+from django.urls import include, path
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-
-    # E-commerce homepage
-    path('', home, name='home'),
-
-    # Hareem's Authentication & Account module
-    path('accounts/', include('accounts.urls')),
+    path("admin/", admin.site.urls),
+    path("", include("store.urls")),
+    path("accounts/", include("accounts.urls")),
+    path("orders/", include("orders.urls")),
 ]

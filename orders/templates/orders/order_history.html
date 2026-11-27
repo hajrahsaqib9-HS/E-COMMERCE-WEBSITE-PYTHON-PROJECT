@@ -1,0 +1,22 @@
+{% extends 'orders/base_orders.html' %}
+{% block content %}
+<div class="form-card">
+  <h2>My Orders</h2>
+  {% if orders %}
+  <table>
+    <tr><th>Order #</th><th>Date</th><th>Total</th><th>Status</th><th></th></tr>
+    {% for o in orders %}
+    <tr>
+      <td>{{ o.short_number }}</td>
+      <td>{{ o.created_at|date:"d M Y" }}</td>
+      <td>Rs. {{ o.total_amount }}</td>
+      <td>{{ o.status }}</td>
+      <td><a href="{% url 'order_details' o.order_number %}">View</a></td>
+    </tr>
+    {% endfor %}
+  </table>
+  {% else %}
+    <p>Abhi tak koi order nahi hai.</p>
+  {% endif %}
+</div>
+{% endblock %}

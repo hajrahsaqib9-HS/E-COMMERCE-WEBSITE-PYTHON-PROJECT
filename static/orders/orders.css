@@ -1,0 +1,50 @@
+
+body {
+    background: #f8f0fa;
+    font-family: Arial, sans-serif;
+    color: #352342;
+}
+
+.navbar {
+    background: linear-gradient(90deg, #8e44ad, #d16ba5);
+}
+
+.form-card {
+    background: white;
+    max-width: 650px;
+    margin: auto;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.08);
+}
+
+.form-card h2 {
+    color: #8e44ad;
+    margin-bottom: 15px;
+}
+
+.form-card h5 {
+    margin-top: 22px;
+    color: #8e44ad;
+}
+
+.form-control,
+.form-select {
+    margin-bottom: 14px;
+    padding: 11px;
+    border-radius: 8px;
+}
+
+.order-btn {
+    background: #a64ac9;
+    color: white;
+    border: none;
+    padding: 11px 20px;
+    border-radius: 8px;
+    margin-top: 15px;
+}
+
+.order-btn:hover {
+    background: #8235a3;
+    color: white;
+}
