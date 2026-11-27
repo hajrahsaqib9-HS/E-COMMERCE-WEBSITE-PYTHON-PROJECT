@@ -1,0 +1,468 @@
+/* ==================================================
+   VELORA — COMPLETE ACCOUNT CSS
+   Lavender, Pink & Luxury Aesthetic
+   Login + Signup
+================================================== */
+
+/* 1. GLOBAL */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'DM Sans', sans-serif;
+    background: #faf9fc;
+    color: #39313b;
+}
+
+/* 2. ANNOUNCEMENT BAR */
+body:has(.auth-section) .announcement-bar {
+    width: 100%;
+    min-height: 42px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 10px 15px;
+
+    background: linear-gradient(
+        100deg,
+        #c18bd8 0%,
+        #a99ae5 50%,
+        #e3a5ce 100%
+    );
+
+    color: #ffffff;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.8px;
+}
+
+/* 3. MAIN HEADER */
+.account-header {
+    width: 100%;
+    padding: 0 5.8%;
+    background: #f5eff8;
+    border-bottom: 1px solid #eee8f2;
+}
+
+.account-nav {
+    width: 100%;
+    min-height: 105px;
+
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+
+    position: relative;
+}
+
+/* 4. LOGO */
+body:has(.auth-section) .account-nav .logo {
+    grid-column: 1;
+    justify-self: start;
+
+    font-family: 'Playfair Display', serif;
+    font-size: 35px;
+    font-weight: 700;
+    letter-spacing: 3px;
+
+    color: #9573c2;
+    text-decoration: none;
+    white-space: nowrap;
+
+    transition: 0.3s ease;
+}
+
+body:has(.auth-section) .account-nav .logo span {
+    color: #d58db5;
+}
+
+body:has(.auth-section) .account-nav .logo:hover {
+    color: #b17eaa;
+}
+
+/* 5. CENTRED NAVIGATION */
+.account-nav .nav-links {
+    grid-column: 2;
+    justify-self: center;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+
+    gap: 38px;
+    width: max-content;
+
+    position: static;
+    transform: none;
+}
+
+.nav-links a {
+    position: relative;
+
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+
+    color: #51465b;
+    text-decoration: none;
+    white-space: nowrap;
+
+    transition: color 0.3s ease;
+}
+
+.nav-links a:hover {
+    color: #a77bc6;
+}
+
+.nav-links a::after {
+    content: '';
+    position: absolute;
+
+    width: 0;
+    height: 2px;
+
+    bottom: -9px;
+    left: 0;
+
+    background: #c18bd8;
+    transition: width 0.3s ease;
+}
+
+.nav-links a:hover::after {
+    width: 100%;
+}
+
+/* 6. MAIN BACKGROUND */
+body:has(.auth-section) main {
+    min-height: 78vh;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 60px 20px;
+
+    background:
+        radial-gradient(
+            circle at 10% 15%,
+            #f0e4f6 0,
+            transparent 36%
+        ),
+        radial-gradient(
+            circle at 90% 85%,
+            #f5e4ef 0,
+            transparent 38%
+        ),
+        #faf9fc;
+}
+
+/* 7. AUTH SECTION */
+.auth-section {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 15px;
+}
+
+.auth-container {
+    width: 100%;
+    max-width: 460px;
+    margin: auto;
+}
+
+/* 8. LOGIN / SIGNUP CARD */
+.auth-card {
+    width: 100%;
+    background: #ffffff;
+
+    padding: 45px 42px;
+    border-radius: 22px;
+
+    border: 1px solid #eee3f2;
+
+    box-shadow:
+        0 15px 45px rgba(91, 63, 112, 0.09);
+
+    text-align: center;
+    transition: box-shadow 0.3s ease;
+}
+
+.auth-card:hover {
+    box-shadow:
+        0 18px 50px rgba(91, 63, 112, 0.13);
+}
+
+/* 9. HEART ICON */
+.auth-icon {
+    width: 55px;
+    height: 55px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    margin: 0 auto 22px;
+    border-radius: 50%;
+
+    background: #f3eafa;
+    color: #a17ab9;
+    font-size: 29px;
+}
+
+/* 10. HEADINGS */
+.auth-card h1,
+.auth-card h2 {
+    font-family: 'Playfair Display', serif;
+    color: #624b75;
+    text-align: center;
+    font-weight: 600;
+    margin-bottom: 12px;
+}
+
+.auth-card h1 {
+    font-size: 34px;
+}
+
+.auth-card h2 {
+    font-size: 29px;
+}
+
+.auth-card h1 span {
+    color: #b17eaa;
+    font-style: italic;
+}
+
+.auth-card p {
+    color: #8b7b91;
+    font-size: 14px;
+    line-height: 1.7;
+}
+
+/* 11. FORMS */
+.auth-card form {
+    margin-top: 40px;
+    text-align: left;
+}
+
+.form-group {
+    margin-bottom: 17px;
+}
+
+.auth-card label {
+    display: block;
+    color: #59476a;
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.auth-card input:not([type="checkbox"]):not([type="submit"]),
+.auth-card select,
+.auth-card textarea {
+    width: 100%;
+    padding: 14px 15px;
+
+    border: 1px solid #e8ddec;
+    border-radius: 10px;
+
+    background: #fdfbfe;
+
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    color: #382b40;
+
+    outline: none;
+    transition: 0.25s ease;
+}
+
+.auth-card input:focus,
+.auth-card select:focus,
+.auth-card textarea:focus {
+    border-color: #aa83c5;
+
+    box-shadow:
+        0 0 0 3px rgba(170, 131, 197, 0.13);
+
+    background: #ffffff;
+}
+
+.auth-card input::placeholder {
+    color: #b7aabf;
+}
+
+/* 12. BUTTONS */
+.auth-button,
+.auth-card button,
+.auth-card input[type="submit"] {
+    width: 100%;
+    padding: 15px;
+
+    border: none;
+    border-radius: 10px;
+
+    background: linear-gradient(
+        100deg,
+        #9674bf,
+        #bd89c8,
+        #d69abb
+    );
+
+    color: #ffffff;
+
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.auth-button:hover,
+.auth-card button:hover,
+.auth-card input[type="submit"]:hover {
+    background: linear-gradient(
+        100deg,
+        #8060a9,
+        #a875b7,
+        #c486aa
+    );
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 7px 18px rgba(140, 101, 169, 0.22);
+}
+
+/* 13. LINKS */
+.auth-card a {
+    color: #9871b2;
+    font-weight: 600;
+    text-decoration: none;
+    transition: 0.2s ease;
+}
+
+.auth-card a:hover {
+    color: #654b80;
+    text-decoration: underline;
+}
+
+.auth-link {
+    margin-top: 25px;
+    font-size: 13px;
+}
+
+.back-home {
+    display: inline-block;
+    margin-top: 23px;
+    font-size: 13px;
+    color: #8c788f;
+}
+
+/* 14. ERROR MESSAGES */
+.error-message {
+    display: block;
+
+    color: #b64e62;
+    background: #fff2f5;
+
+    border: 1px solid #f4dce4;
+    border-radius: 8px;
+
+    padding: 10px 12px;
+    margin-bottom: 15px;
+
+    font-size: 12px;
+}
+
+/* 15. FOOTER */
+body:has(.auth-section) footer {
+    width: 100%;
+    background: #ffffff;
+
+    text-align: center;
+    padding: 22px;
+
+    border-top: 1px solid #eee5f0;
+}
+
+body:has(.auth-section) footer p {
+    color: #998b9e;
+    font-size: 12px;
+}
+
+/* 16. TABLET */
+@media (max-width: 900px) {
+    body:has(.auth-section) .account-header {
+        padding: 0 3%;
+    }
+
+    body:has(.auth-section) .account-nav .logo {
+        font-size: 29px;
+    }
+
+    body:has(.auth-section) .nav-links {
+        gap: 22px;
+    }
+}
+
+/* 17. MOBILE */
+@media (max-width: 650px) {
+    body:has(.auth-section) .announcement-bar {
+        font-size: 11px;
+        letter-spacing: 0.4px;
+    }
+
+    body:has(.auth-section) .account-header {
+        padding: 12px 15px;
+    }
+
+    body:has(.auth-section) .account-nav {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        min-height: auto;
+        padding: 15px 0;
+        gap: 20px;
+    }
+
+    body:has(.auth-section) .account-nav .logo {
+        width: 100%;
+        text-align: center;
+    }
+
+    body:has(.auth-section) .account-nav .nav-links {
+        position: static;
+        transform: none;
+
+        width: 100%;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 22px;
+    }
+
+    body:has(.auth-section) main {
+        padding: 30px 12px;
+    }
+
+    .auth-card {
+        padding: 32px 23px;
+        border-radius: 17px;
+    }
+
+    .auth-card h1 {
+        font-size: 29px;
+    }
+
+    .auth-container {
+        max-width: 100%;
+    }
+}

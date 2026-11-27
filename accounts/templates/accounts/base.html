@@ -1,0 +1,50 @@
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>{% block title %}VELORA | Your Shopping Destination{% endblock %}</title>
+
+    <link rel="stylesheet" href="{% static 'account.css' %}">
+</head>
+
+<body>
+
+    <div class="announcement-bar">
+    ✨ Welcome to VELORA — Discover something beautiful ✨
+</div>
+
+<header class="account-header">
+    <nav class="account-nav">
+
+        <a href="{% url 'home' %}" class="logo">
+            VELORA<span>.</span>
+        </a>
+
+        <div class="nav-links">
+            <a href="{% url 'home' %}">Home</a>
+            <a href="{% url 'home' %}#categories">Categories</a>
+            <a href="{% url 'home' %}#shop">Shop</a>
+            <a href="{% url 'home' %}#about">About</a>
+        </div>
+
+    </nav>
+</header>
+
+
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <footer>
+        <p>© 2026 VELORA. All Rights Reserved.</p>
+    </footer>
+
+</body>
+</html>
