@@ -9,9 +9,12 @@ from store.views import home
 urlpatterns = [
     path('admin/', admin.site.urls),
 
-    # E-commerce homepage
+    # Homepage and product browsing
     path('', home, name='home'),
 
-    # Hareem's Authentication & Account module
+    # Authentication and accounts
     path('accounts/', include('accounts.urls')),
+
+    # Order management
+    path('orders/', include('orders.urls')),
 ]
