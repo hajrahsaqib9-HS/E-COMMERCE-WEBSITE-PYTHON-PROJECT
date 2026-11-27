@@ -1,3 +1,4 @@
+
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
@@ -52,9 +53,12 @@
                 <a href="#" class="nav-icon" title="Wishlist">
                     <i class="bi bi-heart"></i>
                 </a>
-                <a href="#" class="nav-icon" title="Shopping Bag">
+
+                <!-- Connected Shopping Bag -->
+                <a href="{% url 'cart:cart' %}" class="nav-icon" title="Shopping Bag">
                     <i class="bi bi-bag"></i>
                 </a>
+
                 <a href="#" class="login-btn">Login</a>
             </div>
 
@@ -126,23 +130,21 @@
 
         <div class="row g-4">
 
-<!-- Category Filters -->
-<div class="category-filters text-center mb-4">
+            <!-- Category Filters -->
+            <div class="category-filters text-center mb-4">
 
-    <a href="{% url 'home' %}"
-       class="outline-btn">
-        All Products
-    </a>
+                <a href="{% url 'home' %}" class="outline-btn">
+                    All Products
+                </a>
 
-    {% for category in categories %}
-    <a href="{% url 'home' %}?category={{ category|urlencode }}"
-       class="outline-btn">
-        {{ category }}
-    </a>
-    {% endfor %}
+                {% for category in categories %}
+                <a href="{% url 'home' %}?category={{ category|urlencode }}"
+                   class="outline-btn">
+                    {{ category }}
+                </a>
+                {% endfor %}
 
-</div>
-
+            </div>
 
             <div class="col-6 col-lg-3">
                 <a href="#products" class="category-card">
@@ -192,7 +194,6 @@
     </div>
 </section>
 
-
 <!-- Featured Products -->
 <section class="products-section section-padding" id="products">
     <div class="container">
@@ -230,30 +231,45 @@
 
                         <h5>{{ product.name }}</h5>
 
-                        
-<div class="rating">
-    {% if product.stock > 0 %}
-        <span class="text-success">
-            <i class="bi bi-check-circle-fill"></i>
-            In Stock ({{ product.stock }})
-        </span>
-    {% else %}
-        <span class="text-danger">
-            <i class="bi bi-x-circle-fill"></i>
-            Out of Stock
-        </span>
-    {% endif %}
-</div>
-
+                        <div class="rating">
+                            {% if product.stock > 0 %}
+                                <span class="text-success">
+                                    <i class="bi bi-check-circle-fill"></i>
+                                    In Stock ({{ product.stock }})
+                                </span>
+                            {% else %}
+                                <span class="text-danger">
+                                    <i class="bi bi-x-circle-fill"></i>
+                                    Out of Stock
+                                </span>
+                            {% endif %}
+                        </div>
 
                         <div class="product-bottom">
                             <span class="price">
                                 Rs. {{ product.price|floatformat:0 }}
                             </span>
 
-                            <button class="add-btn" title="Add to cart">
+                            <!-- Connected Add to Cart -->
+                            {% if product.stock > 0 %}
+                            <form method="POST"
+                                  action="{% url 'cart:add_to_cart' product.id %}">
+                                {% csrf_token %}
+                                <button type="submit"
+                                        class="add-btn"
+                                        title="Add to cart">
+                                    <i class="bi bi-bag-plus"></i>
+                                </button>
+                            </form>
+                            {% else %}
+                            <button class="add-btn"
+                                    type="button"
+                                    disabled
+                                    title="Out of stock">
                                 <i class="bi bi-bag-plus"></i>
                             </button>
+                            {% endif %}
+
                         </div>
                     </div>
 
