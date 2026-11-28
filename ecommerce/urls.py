@@ -1,6 +1,5 @@
-"""
-URL configuration for the ecommerce project.
-"""
+
+"""URL configuration for the VELORA e-commerce project."""
 
 from django.contrib import admin
 from django.urls import path, include
@@ -9,12 +8,15 @@ from store.views import home
 urlpatterns = [
     path('admin/', admin.site.urls),
 
-    # Homepage and product browsing
+    # Home and Product Browsing - Hajrah
     path('', home, name='home'),
 
-    # Authentication and accounts
+    # Authentication and Account - Hareem
     path('accounts/', include('accounts.urls')),
 
-    # Order management
+    # Cart and Checkout - Rida
+    path('cart/', include('cart.urls')),
+
+    # Order Management - Emaan
     path('orders/', include('orders.urls')),
 ]
