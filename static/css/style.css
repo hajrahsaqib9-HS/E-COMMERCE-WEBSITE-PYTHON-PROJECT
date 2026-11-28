@@ -1087,3 +1087,36 @@ input {
         height: 175px;
     }
 }
+
+/* =========================
+   CART QUANTITY BADGE
+   Isolated navbar styling
+========================= */
+
+.nav-cart-link {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.cart-count-badge {
+    position: absolute;
+    top: -9px;
+    right: -11px;
+    min-width: 18px;
+    height: 18px;
+    padding: 0 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50px;
+    background: #e53955;
+    color: #ffffff;
+    font-size: 10px;
+    font-weight: 700;
+    line-height: 1;
+    border: 2px solid #ffffff;
+    box-shadow: 0 2px 5px rgba(229, 57, 85, 0.2);
+    pointer-events: none;
+}

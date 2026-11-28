@@ -12,327 +12,417 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Bootstrap Icons -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
 
-    <!-- Main Website CSS: static/style.css -->
-    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <!-- Main Website CSS -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
 
-    <!-- Cart Page CSS -->
-    <link rel="stylesheet" href="{% static 'cart.css' %}">
+    <!-- Cart CSS -->
+    <link rel="stylesheet" href="{% static 'css/cart.css' %}">
+
+    <style>
+        .empty-cart-section {
+            max-width: 650px;
+            margin: 65px auto 85px;
+            padding: 55px 25px;
+            text-align: center;
+            background: #ffffff;
+            border: 1px solid #f0e8f0;
+            border-radius: 22px;
+            box-shadow: 0 10px 35px rgba(65, 43, 78, 0.08);
+        }
+
+        .empty-cart-icon {
+            width: 115px;
+            height: 115px;
+            margin: 0 auto 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #f5f0fb, #fff3f7);
+            color: #9678c9;
+            font-size: 48px;
+        }
+
+        .empty-cart-section h2 {
+            color: #30283a;
+            font-family: 'Playfair Display', serif;
+            font-size: 30px;
+            margin-bottom: 12px;
+        }
+
+        .empty-cart-section p {
+            color: #777080;
+            font-size: 14px;
+            line-height: 1.8;
+        }
+
+        .continue-shopping-btn {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 13px 30px;
+            border-radius: 30px;
+            background: linear-gradient(135deg, #9678c9, #bb628f);
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 700;
+            transition: 0.3s ease;
+        }
+
+        .continue-shopping-btn:hover {
+            color: #ffffff;
+            transform: translateY(-3px);
+            box-shadow: 0 7px 18px rgba(150, 120, 201, 0.25);
+        }
+
+        .empty-cart-account {
+            margin-top: 35px;
+            padding-top: 25px;
+            border-top: 1px solid #f0e8f0;
+        }
+
+        .empty-cart-account strong {
+            color: #30283a;
+            font-size: 14px;
+        }
+
+        .empty-cart-account a {
+            color: #9678c9;
+            font-weight: 700;
+            text-decoration: none;
+        }
+
+        .cart-page-heading {
+            font-family: 'Playfair Display', serif;
+            color: #30283a;
+        }
+
+        .cart-product-image {
+            width: 95px;
+            height: 110px;
+            object-fit: cover;
+            border-radius: 12px;
+        }
+
+        .cart-message {
+            border-radius: 10px;
+        }
+
+        @media (max-width: 576px) {
+            .empty-cart-section {
+                margin: 35px 12px 55px;
+                padding: 40px 18px;
+            }
+
+            .empty-cart-section h2 {
+                font-size: 25px;
+            }
+        }
+    </style>
 </head>
 
 <body>
 
-<!-- Announcement Bar -->
-<div class="announcement">
-    ✨ Welcome to VELORA — Discover something beautiful ✨
-</div>
-
-<!-- Same Navbar as Home Page -->
-<nav class="navbar navbar-expand-lg navbar-light bg-white sticky-top">
-    <div class="container py-2">
-
-        <a class="navbar-brand logo" href="{% url 'home' %}">
-            VELORA<span>.</span>
-        </a>
-
-        <button class="navbar-toggler" type="button"
-                data-bs-toggle="collapse"
-                data-bs-target="#navbarContent">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <div class="collapse navbar-collapse" id="navbarContent">
-
-            <ul class="navbar-nav mx-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'home' %}#home">Home</a>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'home' %}#categories">Categories</a>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'home' %}#products">Shop</a>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'home' %}#about">About</a>
-                </li>
-            </ul>
-
-            <div class="nav-actions">
-
-                <a href="{% url 'home' %}#products"
-                   class="nav-icon" title="Search">
-                    <i class="bi bi-search"></i>
-                </a>
-
-                <a href="#" class="nav-icon" title="Wishlist">
-                    <i class="bi bi-heart"></i>
-                </a>
-
-                <a href="{% url 'cart:cart' %}"
-                   class="nav-icon" title="Shopping Bag">
-                    <i class="bi bi-bag"></i>
-                </a>
-
-                <a href="#" class="login-btn">Login</a>
-
-            </div>
-
-        </div>
+    <!-- Announcement Bar -->
+    <div class="announcement-bar">
+        ✨ Welcome to VELORA — Discover something beautiful ✨
     </div>
-</nav>
 
-<!-- Cart Page -->
-<main class="cart-page">
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white sticky-top">
+        <div class="container">
 
-    <div class="container">
+            <a class="navbar-brand" href="{% url 'home' %}">
+                VELORA
+            </a>
 
-        <!-- Page Heading -->
-        <div class="cart-heading">
-            <span class="section-subtitle">YOUR SELECTION</span>
-            <h1>Shopping <span>Cart</span></h1>
-            <p>Review your favourite items before checkout.</p>
+            <button class="navbar-toggler" type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#mainNavbar"
+                    aria-controls="mainNavbar"
+                    aria-expanded="false"
+                    aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="mainNavbar">
+
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'home' %}">Home</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'home' %}#categories">Categories</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'home' %}#products">Shop</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'home' %}#about">About</a>
+                    </li>
+                </ul>
+
+                <div class="nav-actions">
+
+                    <a href="{% url 'home' %}#products"
+                       class="nav-icon" title="Search">
+                        <i class="bi bi-search"></i>
+                    </a>
+
+                    <a href="#" class="nav-icon" title="Wishlist">
+                        <i class="bi bi-heart"></i>
+                    </a>
+
+                    <a href="{% url 'cart:cart' %}"
+                       class="nav-icon" title="Shopping Bag">
+                        <i class="bi bi-bag"></i>
+                    </a>
+
+                    <a href="/accounts/login/" class="login-btn">
+                        Login
+                    </a>
+
+                </div>
+            </div>
         </div>
+    </nav>
 
-        <!-- Messages -->
+
+    <main class="container cart-page py-5">
+
+        <!-- Django Messages -->
         {% if messages %}
             {% for message in messages %}
-                <div class="alert
-                    {% if message.tags == 'error' %}
-                        alert-danger
-                    {% elif message.tags == 'success' %}
-                        alert-success
-                    {% else %}
-                        alert-warning
-                    {% endif %}
-                    alert-dismissible fade show" role="alert">
-
+                <div class="alert alert-{{ message.tags }} cart-message alert-dismissible fade show"
+                     role="alert">
                     {{ message }}
-
-                    <button type="button"
-                            class="btn-close"
+                    <button type="button" class="btn-close"
                             data-bs-dismiss="alert"
-                            aria-label="Close">
-                    </button>
-
+                            aria-label="Close"></button>
                 </div>
             {% endfor %}
         {% endif %}
 
+
         {% if cart %}
 
-        <div class="row g-4">
+            <!-- CART WITH PRODUCTS -->
 
-            <!-- Cart Products -->
-            <div class="col-lg-8">
+            <div class="text-center mb-5">
+                <h1 class="cart-page-heading">Shopping Cart</h1>
+                <p class="text-muted">
+                    Review your beautiful finds before checkout.
+                </p>
+            </div>
 
-                <div class="cart-items-card">
+            <div class="row g-4">
 
-                    {% for product_id, item in cart.items %}
+                <!-- Cart Items -->
+                <div class="col-lg-8">
 
-                    <div class="cart-item">
+                    <div class="cart-items-card">
 
-                        <!-- Product Image -->
-                        <div class="cart-product-image">
+                        {% for product_id, item in cart.items %}
 
-                            {% if item.image %}
-                                <img src="{{ item.image }}" alt="{{ item.name }}">
-                            {% else %}
-                                <div class="cart-image-placeholder">
-                                    <i class="bi bi-image"></i>
+                            <div class="cart-item d-flex flex-wrap align-items-center gap-3 p-3">
+
+                                <!-- Product Image -->
+                                <div>
+                                    {% if item.image %}
+                                        <img src="{{ item.image }}"
+                                             alt="{{ item.name }}"
+                                             class="cart-product-image">
+                                    {% else %}
+                                        <div class="cart-product-image d-flex align-items-center justify-content-center bg-light">
+                                            <i class="bi bi-image fs-2 text-secondary"></i>
+                                        </div>
+                                    {% endif %}
                                 </div>
-                            {% endif %}
 
-                        </div>
+                                <!-- Product Details -->
+                                <div class="flex-grow-1">
 
-                        <!-- Product Details -->
-                        <div class="cart-product-details">
+                                    <h5 class="mb-2">{{ item.name }}</h5>
 
-                            <h5>{{ item.name }}</h5>
+                                    <p class="mb-1 text-muted">
+                                        Price: Rs. {{ item.price|floatformat:2 }}
+                                    </p>
 
-                            <p class="cart-product-price">
-                                Rs. {{ item.price|floatformat:0 }}
-                            </p>
+                                    <p class="mb-2 fw-semibold">
+                                        Subtotal: Rs. {{ item.subtotal|floatformat:2 }}
+                                    </p>
 
-                            {% if item.stock_limit_exceeded %}
-                                <p class="stock-warning">
-                                    <i class="bi bi-exclamation-circle"></i>
-                                    Only {{ item.available_stock }} items are available.
-                                </p>
-                            {% else %}
-                                <p class="stock-available">
-                                    <i class="bi bi-check-circle"></i>
-                                    In Stock
-                                </p>
-                            {% endif %}
+                                    {% if item.stock_limit_exceeded %}
+                                        <small class="text-danger">
+                                            Only {{ item.available_stock }} items available.
+                                            Please update your quantity.
+                                        </small>
+                                    {% endif %}
 
-                            <!-- Quantity Update -->
-                            <div class="cart-item-actions">
+                                </div>
 
-                                <form method="POST"
-                                      action="{% url 'cart:update_quantity' product_id %}"
-                                      class="quantity-form">
+                                <!-- Quantity Controls -->
+                                <div class="d-flex flex-column gap-2 align-items-center">
 
-                                    {% csrf_token %}
+                                    <form method="POST"
+                                          action="{% url 'cart:update_quantity' product_id %}"
+                                          class="d-flex align-items-center gap-2">
 
-                                    <label for="quantity-{{ product_id }}">
-                                        Quantity:
-                                    </label>
+                                        {% csrf_token %}
 
-                                    <input
-                                        type="number"
-                                        id="quantity-{{ product_id }}"
-                                        name="quantity"
-                                        value="{{ item.quantity }}"
-                                        min="1"
-                                        max="{{ item.available_stock }}"
-                                        required
-                                    >
+                                        <label for="quantity-{{ product_id }}"
+                                               class="visually-hidden">
+                                            Quantity
+                                        </label>
 
-                                    <button type="submit" class="update-btn">
-                                        Update
-                                    </button>
+                                        <input
+                                            type="number"
+                                            id="quantity-{{ product_id }}"
+                                            name="quantity"
+                                            value="{{ item.quantity }}"
+                                            min="1"
+                                            max="{{ item.available_stock }}"
+                                            class="form-control text-center"
+                                            style="width:75px;"
+                                            required
+                                        >
 
-                                </form>
+                                        <button type="submit"
+                                                class="btn btn-sm btn-outline-secondary"
+                                                title="Update quantity">
+                                            <i class="bi bi-arrow-repeat"></i>
+                                        </button>
 
-                                <!-- Remove Product -->
-                                <form method="POST"
-                                      action="{% url 'cart:remove_from_cart' product_id %}">
+                                    </form>
 
-                                    {% csrf_token %}
+                                    <!-- Remove Product -->
+                                    <form method="POST"
+                                          action="{% url 'cart:remove_from_cart' product_id %}">
 
-                                    <button type="submit" class="remove-btn">
-                                        <i class="bi bi-trash"></i>
-                                        Remove
-                                    </button>
+                                        {% csrf_token %}
 
-                                </form>
+                                        <button type="submit"
+                                                class="btn btn-sm btn-outline-danger">
+                                            <i class="bi bi-trash"></i>
+                                            Remove
+                                        </button>
+
+                                    </form>
+
+                                </div>
 
                             </div>
 
-                        </div>
+                            <hr class="my-0">
 
-                        <!-- Product Subtotal -->
-                        <div class="cart-item-subtotal">
-
-                            <small>Subtotal</small>
-
-                            <strong>
-                                Rs. {{ item.subtotal|floatformat:0 }}
-                            </strong>
-
-                        </div>
+                        {% endfor %}
 
                     </div>
 
-                    {% endfor %}
+                    <a href="{% url 'home' %}#products"
+                       class="btn btn-outline-secondary rounded-pill mt-4">
+                        <i class="bi bi-arrow-left"></i>
+                        Continue Shopping
+                    </a>
 
                 </div>
 
-                <a href="{% url 'home' %}" class="continue-link">
-                    <i class="bi bi-arrow-left"></i>
-                    Continue Shopping
-                </a>
+
+                <!-- Order Summary -->
+                <div class="col-lg-4">
+
+                    <div class="cart-summary-card">
+
+                        <h4 class="mb-4">Order Summary</h4>
+
+                        <div class="d-flex justify-content-between mb-3">
+                            <span>Subtotal</span>
+                            <span>Rs. {{ total|floatformat:2 }}</span>
+                        </div>
+
+                        <div class="d-flex justify-content-between mb-3">
+                            <span>Delivery</span>
+                            <span>Calculated later</span>
+                        </div>
+
+                        <hr>
+
+                        <div class="d-flex justify-content-between fw-bold mb-4">
+                            <span>Total</span>
+                            <span>Rs. {{ total|floatformat:2 }}</span>
+                        </div>
+
+                        {% if cart %}
+                            <a href="{% url 'cart:checkout' %}"
+                               class="checkout-btn d-block text-center text-decoration-none">
+                                Proceed to Checkout
+                                <i class="bi bi-arrow-right"></i>
+                            </a>
+                        {% endif %}
+
+                    </div>
+
+                </div>
 
             </div>
 
-            <!-- Order Summary -->
-            <div class="col-lg-4">
 
-                <div class="cart-summary">
+        {% else %}
 
-                    <h4>Order Summary</h4>
+            <!-- EMPTY CART INTERFACE -->
 
-                    <div class="summary-row">
-                        <span>Total Products</span>
-                        <strong>{{ cart|length }}</strong>
-                    </div>
+            <div class="empty-cart-section">
 
-                    <div class="summary-row">
-                        <span>Subtotal</span>
-                        <strong>
-                            Rs. {{ total|floatformat:0 }}
-                        </strong>
-                    </div>
+                <div class="empty-cart-icon">
+                    <i class="bi bi-bag"></i>
+                </div>
 
-                    <div class="summary-row">
-                        <span>Delivery</span>
-                        <strong>Calculated later</strong>
-                    </div>
+                <h2>Your cart is empty</h2>
 
-                    <div class="summary-divider"></div>
+                <p>
+                    Looks like you haven't added anything to your cart yet.
+                    Explore VELORA and find something beautiful!
+                </p>
 
-                    <div class="summary-total">
-                        <span>Total</span>
-                        <strong>
-                            Rs. {{ total|floatformat:0 }}
-                        </strong>
-                    </div>
+                <a href="{% url 'home' %}#products"
+                   class="continue-shopping-btn">
+                    <i class="bi bi-arrow-left me-2"></i>
+                    Continue Shopping
+                </a>
 
-                    <a href="{% url 'cart:checkout' %}" class="checkout-btn">
-                        Proceed to Checkout
-                        <i class="bi bi-arrow-right"></i>
-                    </a>
+                <div class="empty-cart-account">
 
-                    <p class="secure-note">
-                        <i class="bi bi-shield-check"></i>
-                        Your shopping details are handled securely.
+                    <strong>Have an account?</strong>
+
+                    <p class="mt-2 mb-0">
+                        <a href="/accounts/login/">Login</a>
+                        to check out faster.
                     </p>
 
                 </div>
 
             </div>
 
-        </div>
-
-        {% else %}
-
-        <!-- Empty Cart -->
-        <div class="empty-cart">
-
-            <div class="empty-cart-icon">
-                <i class="bi bi-bag"></i>
-            </div>
-
-            <h3>Your Cart is Empty</h3>
-
-            <p>
-                You haven't added any products to your shopping bag yet.
-            </p>
-
-            <a href="{% url 'home' %}" class="primary-btn">
-                Explore Products
-                <i class="bi bi-arrow-right"></i>
-            </a>
-
-        </div>
-
         {% endif %}
 
-    </div>
+    </main>
 
-</main>
 
-<!-- Same Website Footer Style -->
-<footer class="footer cart-footer">
+    <!-- Footer -->
+    <footer class="text-center py-4">
+        <p class="mb-0 text-muted">
+            © 2026 VELORA. All rights reserved.
+        </p>
+    </footer>
 
-    <div class="container">
 
-        <div class="footer-bottom">
-            <p>© 2026 VELORA. All rights reserved.</p>
-            <p>Made with love for your everyday style.</p>
-        </div>
-
-    </div>
-
-</footer>
-
-<!-- Bootstrap JavaScript -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>
 </html>
